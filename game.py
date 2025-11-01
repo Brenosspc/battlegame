@@ -1,3 +1,4 @@
+import random
 # PERSONAGEM: classe mae
 # Hero: ele herda tudo personagem, atributos e metodos (controlado pelo usuario)
 # Inimigo: adversario do usuario
@@ -21,7 +22,7 @@ class Personagem:
         return f"Nome: {self.get_nome()}\nVida: {self.get_vida()}\nNivel: {self.get_nivel()}"
 
     def atacar(self, alvo):# mecanica de combate
-        dano = self.__nivel * 2
+        dano = random.randint(self.get_nivel() * 2, self.get_nivel() * 4)
         alvo.receber_ataque(dano)
         print(f"{self.get_nome()} atacou {alvo.get_nome()} e causou {dano} de dano")
 
@@ -42,7 +43,7 @@ class Heroi(Personagem):
         return f"{super().exibir_detalhes()}\nHabilidade: {self.get_habilidade()}\n"
 
     def ataque_especial(self, alvo):
-        dano = self.get_nivel() * 5
+        dano = random.randint(self.get_nivel() * 5, self.get_nivel() * 8)
         alvo.receber_ataque(dano)
         print(f"{self.get_nome()} usou a habilidade especial {self.get_habilidade()} em {alvo.get_nome()} e causou {dano} de dano")
 
@@ -61,7 +62,7 @@ class Jogo:
     """ Classe orquestradora do jogo """
     def __init__(self):
         self.heroi = Heroi(nome="Ethan", vida=100, nivel=5, habilidade="Super Forca")
-        self.inimigo = Inimigo(nome="Morcego", vida=50, nivel=3, tipo="Voador")
+        self.inimigo = Inimigo(nome="Morcego", vida=80, nivel=5, tipo="Voador")
     def iniciar_batalha(self):
         """ Gestao da batalha em tempos """
         print("Iniciando batalha")
